@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbed Menu Example</title>
+    
+    <!-- CSS STYLING -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        /* Container for the tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for individual tab buttons */
+        .tab-button {
+            background-color: #eee;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 1em;
+        }
+
+        /* Hover effect */
+        .tab-button:hover {
+            background-color: #ddd;
+        }
+
+        /* Active tab styling */
+        .tab-button.active {
+            background-color: #3498db;
+            color: white;
+            border-bottom: 2px solid #3498db;
+        }
+
+        /* Content Area */
+        .tab-content {
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            display: none; /* By default, all content sections are hidden */
+        }
+
+        /* Class used by JavaScript to show content */
+        .tab-content.active {
+            display: block; 
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Company Information</h1>
+
+    <!-- Tab Buttons Menu -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'news')">News</button>
+        <button class="tab-button" onclick="openTab(event, 'writings')">Writings</button>
+        <button class="tab-button" onclick="openTab(event, 'about')">About Us</button>
+        <button class="tab-button" onclick="openTab(event, 'contact')">Contact Us</button>
+    </div>
+
+    <!-- Tab Content Containers -->
+    <div id="news" class="tab-content active">
+        <h2>📰 Latest Updates</h2>
+        <p>Welcome to our news section! Here you will find articles, announcements, and updates on our company's progress and achievements. Check back soon 
+for more stories!</p>
+    </div>
+
+    <div id="writings" class="tab-content">
+        <h2>Ruoping's writings</h2>
+        <label for="options">Choose an item from the list:</label>
+            <br>
+            <select id="options" name="options">
+                <option value="item1">English</option>
+                <option value="item2">Chinese</option>
+                <option value="item3">Whatever</option>
+            </select>
+    </div>
+
+    <div id="about" class="tab-content">
+        <h2>🌟 About Our Company</h2>
+        <p>We are committed to excellence and innovation. Our goal is to provide the best products and services to our community. Learn more about our 
+mission and vision.</p>
+    </div>
+
+    <div id="contact" class="tab-content">
+        <h2 style="color: #e74c3c;">📞 Get In Touch</h2>
+        <p>Have questions or need support? We're here to help! Please contact us using the following information:</p>
+        <p><strong>Email:</strong> <a href="mailto:ruoping001@yahoo.com">ruoping001@yahoo.com</a></p>
+        <p><strong>Phone:</strong> (123) 456-7890</p>
+        <p>We look forward to connecting with you!</p>
+    </div>
+
+
+    <!-- JAVASCRIPT INTERACTIVITY -->
+    <script>
+        // Function to handle the tab switching logic
+        function openTab(evt, tabName) {
+            
+            // 1. Get all elements with the class 'tab-content'
+            var contents = document.getElementsByClassName("tab-content");
+            
+            // 2. Hide all content elements by removing 'active' class
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+            // 3. Get all buttons with the class 'tab-button'
+            var buttons = document.getElementsByClassName("tab-button");
+            
+            // 4. Remove 'active' class from all buttons
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            // 5. SHOW THE SELECTED CONTENT:
+            // Find the specific content element using its ID (e.g., 'news')
+            document.getElementById(tabName).classList.add("active");
+
+            // 6. MARK THE SELECTED BUTTON AS ACTIVE:
+            // Add 'active' class to the clicked button
+            evt.currentTarget.classList.add("active");
+        }
+
+        // OPTIONAL: Ensure that the correct tab is active on initial load (especially if the HTML structure changes)
+        // The HTML structure already handles this by adding the 'active' class to the first button and content.
+    </script>
+
+</body>
+</html>
