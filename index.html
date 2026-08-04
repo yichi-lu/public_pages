@@ -87,9 +87,10 @@ for more stories!</p>
         <h2>Ruoping's writings</h2>
         <label for="options">Choose an item from the list:</label>
             <br>
-            <select id="options" name="options" onchange="showParagraph()">
-                <option value="item1">English</option>
-                <option value="item2">Chinese</option>
+            <select id="options" name="options" onchange="if (this.value) window.location.href=this.value;">
+                <option value="">Select a file...</option>
+                <option value="files/WXP_SFZ.docx">English</option>
+                <option value="files/shanghai.docx">Chinese</option>
                 <option value="item3">Whatever</option>
             </select>
     </div>
