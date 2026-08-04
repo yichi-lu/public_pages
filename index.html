@@ -84,7 +84,7 @@ for more stories!</p>
         <h2>Ruoping's writings</h2>
         <label for="options">Choose an item from the list:</label>
             <br>
-            <select id="options" name="options">
+            <select id="options" name="options" onchange="showParagraph()">
                 <option value="item1">English</option>
                 <option value="item2">Chinese</option>
                 <option value="item3">Whatever</option>
@@ -103,6 +103,19 @@ for more stories!</p>
         <p>We are committed to excellence and innovation. Our goal is to provide the best products and services to our community. Learn more about our 
 mission and vision.</p>
     </div>
+
+    <script>
+        function showParagraph() {
+            var allParas = document.getElementsByClassName('content');
+            for (var i = 0; i < allParas.length; i++) {
+                allParas[i].classList.remove('active');
+            }
+            var selectedId = document.getElementById('options').value;
+            if (selectedId) {
+                document.getElementById(selectedId).classList.add('active');
+            }
+        }
+    </script>
 
     <div id="contact" class="tab-content">
         <h2 style="color: #e74c3c;">📞 Get In Touch</h2>
