@@ -87,7 +87,7 @@ for more stories!</p>
         <h2>Ruoping's writings</h2>
         <label for="options">Choose an item from the list:</label>
             <br>
-            <select id="options" name="options" onchange="if (this.value) window.location.href=this.value;">
+            <select id="file-dropdown" name="options" onchange="if (this.value) window.location.href=this.value;">
                 <option value="">Select a file...</option>
                 <option value="files/WXP_SFZ.docx">English</option>
                 <option value="files/shanghai.docx">Chinese</option>
@@ -95,7 +95,9 @@ for more stories!</p>
             </select>
     </div>
     
-
+    <!-- The area where file content will be displayed -->
+    <div id="file-content">Content will appear here...</div>
+    
     <div id="item1" class="content"><p>This is the first long English paragraph. It gives you all the details about the first choice in the menu. You can write anything you want here to explain your topic clearly.</p></div>
   
     <div id="item2" class="content">在獲得相關監管批准的前提下，雙方計劃於2027年上半年面向公眾推出商業化自動駕駛共享出行服務。屆時當地乘客可體驗文遠知行最新一代、符合.</div>
@@ -119,6 +121,44 @@ mission and vision.</p>
                 document.getElementById(selectedId).classList.add('active');
             }
         }
+    </script>
+
+    <script>
+        const dropdown = document.getElementById('file-dropdown');
+        const contentDisplay = document.getElementById('file-content');
+
+        // Listen for when the user selects a different item in the dropdown
+        dropdown.addEventListener('change', function() {
+            const filePath = this.value;
+
+            // If the user selects the default empty option, clear the display
+            if (!filePath) {
+                contentDisplay.textContent = 'Content will appear here...';
+                return;
+            }
+
+            // Show a loading message while the file is being fetched
+            contentDisplay.textContent = 'Loading...';
+
+            // Fetch the file content
+            fetch(filePath)
+                .then(response => {
+                    // Check if the file was successfully found
+                    if (!response.ok) {
+                        throw new Error('Could not load the file. Check if it exists.');
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    // Display the text inside the div
+                    contentDisplay.textContent = text;
+                })
+                .catch(error => {
+                    // Display any errors (e.g., file not found)
+                    contentDisplay.textContent = 'Error: ' + error.message;
+                    contentDisplay.style.color = 'red';
+                });
+        });
     </script>
 
     <div id="contact" class="tab-content">
